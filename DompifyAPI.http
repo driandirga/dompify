@@ -1,0 +1,6 @@
+@DompifyAPI_HostAddress = http://localhost:5277
+
+GET {{DompifyAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
