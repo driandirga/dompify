@@ -43,4 +43,9 @@ namespace DompifyAPI.Domain.Entities
         [Column("deleted_by")]
         public string? DeletedBy { get; set; }
     }
+
+    public class Data
+    {
+        public string? Token { get; set; }
+    }
 }

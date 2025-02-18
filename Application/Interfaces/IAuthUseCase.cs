@@ -18,6 +18,6 @@ namespace DompifyAPI.Application.Interfaces
         Task CreateNewPasswordAsync(string email, string password, string confirmPassword);
         string GenerateOTPToken(string otp);
         Task<bool> SendOtpEmailAsync(string email);
-        Task<bool> ValidateOtpTokenAsync(string email, string otp);
+        Task<Data?> ValidateOtpTokenAsync(string email, string otp);
     }
 }

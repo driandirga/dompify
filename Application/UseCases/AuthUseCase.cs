@@ -189,7 +189,7 @@ namespace DompifyAPI.Application.UseCases
             return true;
         }
 
-        public async Task<bool> ValidateOtpTokenAsync(string email, string otpCode)
+        public async Task<Data?> ValidateOtpTokenAsync(string email, string otpCode)
         {
             var user = await _authRepository.GetUserByEmailAsync(email)
                         ?? throw new ArgumentException("User not found");
@@ -215,9 +215,12 @@ namespace DompifyAPI.Application.UseCases
 
             var otpClaim = principal.Claims.FirstOrDefault(c => c.Type == "otpCode")?.Value;
             if (otpClaim == null)
-                return false;
+                return null;
 
-            return otpClaim == otpCode;
+            if(otpClaim != otpCode)
+                return null;
+
+            return new Data { Token = otpEntry.Token };
         }
     }
 }

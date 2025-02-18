@@ -76,9 +76,11 @@ namespace DompifyAPI.WebApi.Controllers
         {
             try
             {
-                bool isValid = await _authUseCase.ValidateOtpTokenAsync(request.Email!, request.OTP!);
 
-                return ResponseFormatter.Success(StatusCodes.Status200OK, isValid ? "OTP is valid" : "OTP is invalid", null);
+                var token = await _authUseCase.ValidateOtpTokenAsync(request.Email!, request.OTP!);
+                string message = token == null ? "OTP is invalid" : "OTP is valid";
+
+                return ResponseFormatter.Success(StatusCodes.Status200OK, message, token);
             }
             catch (ArgumentException ex)
             {
